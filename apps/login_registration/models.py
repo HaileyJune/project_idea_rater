@@ -13,14 +13,16 @@ class UsersManager(models.Manager):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Real Emails Please"
-        # also don't allow them to make multiple accounts with the same email
+        if len(Users.objects.filter(email=postData['email'])) > 0:
+            errors['email'] = "You already have an account!"
         if len(Users.objects.filter(email=postData['email'])) > 0:
             errors['email'] = "You already have an account!"
         if len(postData['password']) < 8:
             errors['password'] = "Your password is too whimpy."
         if postData['password'] != postData['confirm']:
             errors['confim'] = "You just set the password, how did you get it wrong?"
-        # add validation for teams 
+        if len(postData['team_code']) < 2:
+            errors['team_code'] = "I hope you try harder than that with your password."
         return errors
 
     def login_validator(self, postData):
@@ -44,5 +46,6 @@ class Users(models.Model):
     passhash = models.CharField(max_length=60)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    # add team
+    team = models.ForeignKey(Projects, related_name="users")
     objects = UsersManager()
+    # reviews
