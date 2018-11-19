@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'new^$', views.new),
     url(r'^create$', views.add),
     url(r'^(?P<num>\d+)$', views.project),
-    url(r'^(?P<num>\d+)/vote$', views.vote),
-    url(r'^(?P<num>\d+)/update$', views.add_vote),
+    url(r'^(?P<num>\d+)/edit$', views.edit),
+    url(r'^(?P<num>\d+)/update$', views.update),
+    url(r'^(?P<num>\d+)/vote$', views.add_vote),
 ]

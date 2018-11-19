@@ -20,6 +20,7 @@ class UsersManager(models.Manager):
             errors['password'] = "Your password is too whimpy."
         if postData['password'] != postData['confirm']:
             errors['confim'] = "You just set the password, how did you get it wrong?"
+        # add validation for teams 
         return errors
 
     def login_validator(self, postData):
@@ -43,4 +44,5 @@ class Users(models.Model):
     passhash = models.CharField(max_length=60)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # add team
     objects = UsersManager()

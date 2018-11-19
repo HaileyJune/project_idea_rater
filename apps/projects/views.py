@@ -19,9 +19,13 @@ def project(reqest, num):
     }
     return render (request, 'project.html', context)
 
-def vote(reqest, num):
+def edit(reqest, num):
     # vote page
-    return render(request, "vote.html")
+    return render(request, "edit.html")
+
+def update(request):
+    # add changes to project
+    return redirect("/projects")
 
 def add_vote(request):
     # add vote to database

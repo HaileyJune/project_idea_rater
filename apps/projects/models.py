@@ -36,9 +36,13 @@ class Reviews(models.Model):
 
     objects = ReviewsManager()
 
-class Comments(models.Model):
-    user = models.ForeignKey(Users, related_name="comments")
-    project = models.ForeignKey(Projects, related_name="comments")
-    content = models.TextField(null=True)
+# class Comments(models.Model):
+#     user = models.ForeignKey(Users, related_name="comments")
+#     project = models.ForeignKey(Projects, related_name="comments")
+#     content = models.TextField(null=True)
     
-    objects = CommentsManager()
+#     objects = CommentsManager()
+
+class Teams(models.Model):
+    team_name = models.CharField(max_length=60)
+    project = models.ForeignKey(Projects, related_name="team")
