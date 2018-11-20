@@ -12,5 +12,24 @@
 </head>
 <body>
     <!-- display imges and project names in divs, links to individual projects -->
+    <header>
+        <h1>Project Grader</h1>
+        <a href="">Edit My Project</a> 
+        <!-- link to projects/<projectnum>/edit -->
+        <a href="/logout">Logout</a>
+    </header>
+
+    <main>
+        {%for project in projects%}
+        <!-- make sure it's not showing hidden projects -->
+        <div>
+            <!-- img -->
+            <h3><a href="projects/{{project.id}}">{{project.title}}</a></h3>
+            <h3>{{project.team_name}}</h3>
+            <h3>{{project.rating}}</h3>
+        </div>
+        {% endfor %}
+    </main>
+
 </body>
 </html>
