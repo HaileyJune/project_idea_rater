@@ -1,32 +1,29 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from apps.login_registration.models import Users
+from apps.projects.models import Projects, Reviews
+
 def index(request):
     context = {
-        # database stuff
+        "projects": Projects.objects.all()
     }
     return render(request, "index.html", context)
 
-def new(request):
-    # new project page
-    return render(request, "new.html")
-
-def add(request):
-    # add to database
-    return redirect ("/projects/" + num)
-
-def project(reqest, num):
+def project(request, id):
     context = {
-        # project
+        "this_project": Projects.objects.get(id=id)
     }
     return render (request, 'project.html', context)
 
-def edit(reqest, num):
-    # vote page
+def edit(request, id):
+    
     return render(request, "edit.html")
 
-def update(request):
+def update(request, id):
     # add changes to project
     return redirect("/projects")
 
-def add_vote(request):
+def add_vote(request, id):
+    
     # add vote to database
     return redirect("/projects")
