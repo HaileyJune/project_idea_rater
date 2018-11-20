@@ -28,10 +28,9 @@ class Project(models.Model):
     title = models.CharField(max_length=30, default='New Project') #default: New Project
     description = models.TextField(null=True, default='Description here') #default: Put your information here and stuff
     # img, default smiley
-    # teams
     # reviews
     team_name = models.CharField(max_length=30)
-    team_code = models.ForeignKey(Users, related_name="team_code")
+    team_code = models.ForeignKey(Users, related_name="project")
     # users
     objects = ProjectsManager()
 

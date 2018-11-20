@@ -18,8 +18,8 @@ class UsersManager(models.Manager):
             errors['password'] = "Your password is too whimpy."
         if postData['password'] != postData['confirm']:
             errors['confim'] = "You just set the password, how did you get it wrong?"
-        if len(postData['team']) < 2:
-            errors['team'] = "I hope you try harder than that with your password."
+        if len(postData['team_code']) < 2:
+            errors['team_code'] = "I hope you try harder than that with your password."
         return errors
 
     def login_validator(self, postData):
@@ -40,6 +40,7 @@ class Users(models.Model):
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
     email = models.CharField(max_length=60)
+    team_code = models.CharField(max_length=60)
     passhash = models.CharField(max_length=60)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
