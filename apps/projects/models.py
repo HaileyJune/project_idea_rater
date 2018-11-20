@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
+from django.db.models import Avg
 from apps.login_registration.models import Users
 
 class ProjectsManager(models.Manager):
@@ -10,6 +11,17 @@ class ProjectsManager(models.Manager):
         if len(postData['description']) < 10:
             errors['description'] = "Could you expand on that?"
         return errors
+    def review_average(self, catagory):
+        average = Reviews.objects.filter(project=self).aggregate(Avg('{catagory}'))
+        return average
+    def review_total(self):
+        compleation = Reviews.objects.filter(project=self).aggregate(Avg('compleation'))
+        creativity = Reviews.objects.filter(project=self).aggregate(Avg('creativity'))
+        collaberation = Reviews.objects.filter(project=self).aggregate(Avg('collaberation'))
+        complexity = Reviews.objects.filter(project=self).aggregate(Avg('complexity'))
+        total = compleation + creativity + collaberation + complexity
+        full_average = total / 4
+        return full_average
 
 
 class Projects(models.Model):
@@ -26,8 +38,8 @@ class Projects(models.Model):
 class Reviews(models.Model):
     user = models.ForeignKey(Users, related_name="reviews")
     project = models.ForeignKey(Projects, related_name="reviews")
-    compleation = models.IntegerField(default=0)
-    creativity = models.IntegerField(default=0)
-    collaberation = models.IntegerField(default=0)
-    complexity = models.IntegerField(default=0)
+    compleation = models.IntegerField(default=5)
+    creativity = models.IntegerField(default=5)
+    collaberation = models.IntegerField(default=5)
+    complexity = models.IntegerField(default=5)
     objects = ProjectsManager()
