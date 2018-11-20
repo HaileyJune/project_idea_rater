@@ -3,19 +3,12 @@ from django.db import models
 from apps.login_registration.models import Users
 
 class ProjectsManager(models.Manager):
-    def basic_validator(self, postData):
+    def project_validator(self, postData):
         errors = {}
         if len(postData['title']) < 3:
             errors['title'] = "That's not much of a project"
         if len(postData['description']) < 10:
             errors['description'] = "Could you expand on that?"
-        return errors
-    def basic_validator(self, postData):
-        errors = {}
-        if len(postData['content']) < 1:
-            errors['content'] = "You don't have anything to say?"
-        elif len(postData['content']) < 3:
-            errors['content'] = "You couldn't even say 'nice!'? Say a little more."
         return errors
 
 
@@ -38,4 +31,3 @@ class Reviews(models.Model):
     collaberation = models.IntegerField(default=0)
     complexity = models.IntegerField(default=0)
     objects = ProjectsManager()
-    
