@@ -45,3 +45,4 @@ class Users(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UsersManager()
     # reviews
+    # team_code
