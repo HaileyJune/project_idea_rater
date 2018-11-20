@@ -1,17 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from apps.login_registration.models import Users
-from apps.projects.models import Projects, Reviews
+from apps.projects.models import Project, Reviews
 
 def index(request):
     context = {
-        "projects": Projects.objects.all()
+        "projects": Project.objects.all()
     }
     return render(request, "index.html", context)
 
 def project(request, id):
     context = {
-        "this_project": Projects.objects.get(id=id)
+        "this_project": Project.objects.get(id=id)
     }
     return render (request, 'project.html', context)
 
