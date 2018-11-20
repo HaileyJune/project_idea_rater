@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.db import models
 import re
 import bcrypt
-# Create your models here.
 class UsersManager(models.Manager):
     def register_validator(self, postData):
         errors = {}
@@ -13,8 +12,6 @@ class UsersManager(models.Manager):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Real Emails Please"
-        if len(Users.objects.filter(email=postData['email'])) > 0:
-            errors['email'] = "You already have an account!"
         if len(Users.objects.filter(email=postData['email'])) > 0:
             errors['email'] = "You already have an account!"
         if len(postData['password']) < 8:
@@ -43,9 +40,9 @@ class Users(models.Model):
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
     email = models.CharField(max_length=60)
+    team_code = models.CharField(max_length=60)
     passhash = models.CharField(max_length=60)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    team = models.ForeignKey(Projects, related_name="users")
     objects = UsersManager()
     # reviews

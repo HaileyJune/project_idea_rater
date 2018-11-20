@@ -17,8 +17,8 @@ def reg(request):
 
     else:
         hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
-        user = Users.objects.create(first_name = request.POST['fname'], last_name = request.POST['lname'], email = request.POST['email'], passhash = hash)
-        request.session['userid'] = user.id        
+        user = Users.objects.create(team_code= request.POST["team_code"],first_name = request.POST['fname'], last_name = request.POST['lname'], email = request.POST['email'], passhash = hash)
+        request.session['userid'] = user.id       
         return redirect ('/success')
 
 def log(request):

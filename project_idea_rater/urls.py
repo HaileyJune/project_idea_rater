@@ -17,6 +17,6 @@ from django.conf.urls import url, include
 
 
 urlpatterns = [
-    url(r'^projects/', include('projects.urls')),
-    url(r'^', include('login_resistration.urls')),
+    url(r'^projects/', include('apps.projects.urls')),
+    url(r'^', include('apps.login_registration.urls')),
 ]
