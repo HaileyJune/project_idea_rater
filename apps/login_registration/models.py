@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.db import models
 import re
 import bcrypt
-# Create your models here.
 class UsersManager(models.Manager):
     def register_validator(self, postData):
         errors = {}
@@ -15,14 +14,12 @@ class UsersManager(models.Manager):
             errors['email'] = "Real Emails Please"
         if len(Users.objects.filter(email=postData['email'])) > 0:
             errors['email'] = "You already have an account!"
-        if len(Users.objects.filter(email=postData['email'])) > 0:
-            errors['email'] = "You already have an account!"
         if len(postData['password']) < 8:
             errors['password'] = "Your password is too whimpy."
         if postData['password'] != postData['confirm']:
             errors['confim'] = "You just set the password, how did you get it wrong?"
-        if len(postData['team_code']) < 2:
-            errors['team_code'] = "I hope you try harder than that with your password."
+        if len(postData['team']) < 2:
+            errors['team'] = "I hope you try harder than that with your password."
         return errors
 
     def login_validator(self, postData):
@@ -46,6 +43,5 @@ class Users(models.Model):
     passhash = models.CharField(max_length=60)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    team = models.ForeignKey(Projects, related_name="users")
     objects = UsersManager()
     # reviews
