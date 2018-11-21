@@ -7,13 +7,16 @@ def index(request):
     context = {
         "projects": Project.objects.all()
     }
-    return render(request, "index.html", context)
+    return render(request, "projects/index.html", context)
 
 def project(request, id):
     context = {
         "this_project": Project.objects.get(id=id)
     }
     return render (request, 'project.html', context)
+
+def new(request):
+    return render(request, "projects/new.html")
 
 def edit(request, id):
     

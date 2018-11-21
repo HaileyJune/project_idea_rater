@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'projects/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'projects/css/skeleton.css'%}">
+    
     <title>Add A Project</title>
 </head>
+
 <body>
     <h1>Create a new project</h1>
     <form action="" method="POST">
-
+        {% csrf_token %}
+        <h6>Give your project a Title</h6>
+        <input type="text" name="title" placeholder="Give your project a title">
+        <h6>Describe your project</h6>
+        <textarea name="description" cols="50" rows="50" style="font-size: 14pt;"></textarea>
+        <h6>Team Name</h6>
+        <input type="text" name="team_name">
+        <input type="submit" value="Submit" class="button-primary">
     </form>
-    
+    <a href="/projects/index">Main Page</a>
+
 </body>
+
 </html>

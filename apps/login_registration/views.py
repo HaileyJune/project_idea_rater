@@ -34,7 +34,7 @@ def log(request):
 
 def success(request):
     if 'userid' in request.session:
-        return render(request, 'projects/index.html')
+        return redirect(request, '/projects/index')
     else:
         return redirect('/')
 
